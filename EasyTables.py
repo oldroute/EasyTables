@@ -35,16 +35,7 @@ table_applicant = {
               ("speciality", "speciality", "code"),
             ],
           }
-# ------------
-url_subject = 'http://abit.susu.ru/exam/minball_c.php'
-selector_subject = {'class': 'tbsmall'}
-table_subject = {
-          "NAME": "subject",
-          "COLUMNS": [
-              "name VARCHAR(255)",
-              "value INTEGER",
-          ]
-        }
+
 # -------------
 url_speciality = 'http://abit.susu.ru/stat/ball_konk/ball_2017.php'
 selector_speciality = {'class': 'tb'}
@@ -63,11 +54,8 @@ table_speciality = {
 applicant = TL(table_applicant)
 # applicant.insert_records(url_applicant, selector_applicant, [0, 2])
 
-subject = TL(table_subject)
-# subject.insert_records(url_subject, selector_subject)
-
 speciality = TL(table_speciality)
-# speciality.insert_records(url_speciality, selector_speciality, [0, ])
+speciality.insert_records(url_speciality, selector_speciality, [0, ])
 
 result_tables = list()
 applicant_name = "Колянов Илья Игоревич"
@@ -137,14 +125,3 @@ for table in speciality_tables:
 # ------ таблицы специальностей
 TableConstructor.create(result_tables, "templates/entries.html")
 
-# ------ server start
-from http.server import HTTPServer, CGIHTTPRequestHandler
-server_address = ("localhost", 8000)
-httpd = HTTPServer(server_address, CGIHTTPRequestHandler)
-httpd.server_activate()
-httpd.server_close()
-
-try:
-    httpd.serve_forever()
-except:
-    pass
