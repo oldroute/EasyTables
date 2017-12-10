@@ -17,4 +17,3 @@
  * urllib3
  * beautifulsoup4
  * lxml
- * psycopg2
